@@ -23,10 +23,10 @@ public class GameTest {
     }
 
     @Test
-    void givenFirstFrameAndFirstRoll_whenBallHits1Pin_thenTotalScoreShouldBe0() {
+    void givenFirstFrameAndFirstRoll_whenBallHits1Pin_thenTotalScoreShouldBe1() {
         game.roll(1);
         int score = game.score();
-        assertEquals(0, score);
+        assertEquals(1, score);
     }
 
     @Test
@@ -38,10 +38,19 @@ public class GameTest {
     }
 
     @Test
-    void givenFirstFrame_whenBallHits5PinsOnFirstRollAnd5PinsOnSecondRoll_thenTotalScoreShouldBe0() {
+    void givenFirstFrame_whenBallHits5PinsOnFirstRollAnd5PinsOnSecondRoll_thenTotalScoreShouldBe10() {
         game.roll(5);
         game.roll(5);
         int score = game.score();
-        assertEquals(0, score);
+        assertEquals(10, score);
+    }
+
+    @Test
+    void givenFirstFrameIsSpare_whenBallHits2PinsOnFirstRoll_thenTotalScoreShouldBe14() {
+        game.roll(5);
+        game.roll(5);
+        game.roll(2);
+        int score = game.score();
+        assertEquals(14, score);
     }
 }

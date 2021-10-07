@@ -10,14 +10,14 @@ public class Game {
 
     public int score() {
         int score = 0;
-        if (currentRoll % 2 == 0) {
-            for (int currentFrame = 0; currentFrame < maximumFrame; currentFrame++) {
-                for (int roll = 0; roll < 2; roll++) {
-                    if (!isSpare(currentFrame)) {
-                        score += rolls[(currentFrame * 2) + roll];
-                    }
-                }
+        int spareFrame = 0;
+        for (int currentFrame = 0; currentFrame < maximumFrame; currentFrame++) {
+            if (isSpare(spareFrame)) {
+                score += 10 + rolls[spareFrame + 2];
+            } else {
+                score += rolls[spareFrame] + rolls[spareFrame + 1];
             }
+            spareFrame += 2;
         }
         return score;
     }
@@ -27,6 +27,6 @@ public class Game {
     }
 
     private boolean isSpare(int currentFrame) {
-        return rolls[(currentFrame * 2)] + rolls[(currentFrame * 2 + 1)] == 10;
+        return rolls[currentFrame] + rolls[currentFrame + 1] == 10;
     }
 }
