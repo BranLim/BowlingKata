@@ -16,25 +16,32 @@ public class GameTest {
     }
 
     @Test
-    void givenFirstFrame_whenBallIsInGutter_thenScoreShouldBe0() {
+    void givenFirstFrame_whenBallIsInGutter_thenTotalScoreShouldBe0() {
         game.roll(0);
         int score = game.score();
         assertEquals(0, score);
     }
 
     @Test
-    void givenFirstFrame_whenBallHits1Pin_thenScoreShouldBe0() {
+    void givenFirstFrameAndFirstRoll_whenBallHits1Pin_thenTotalScoreShouldBe0() {
         game.roll(1);
         int score = game.score();
         assertEquals(0, score);
     }
 
     @Test
-    void givenFirstFrame_whenBallHits1PinsOnFirstRollAndballHits1PinsOnSecondRoll_thenScoreShouldBe2() {
+    void givenFirstFrame_whenBallHits1PinsOnFirstRollAnd1PinsOnSecondRoll_thenTotalScoreShouldBe2() {
         game.roll(1);
         game.roll(1);
         int score = game.score();
         assertEquals(2, score);
+    }
 
+    @Test
+    void givenFirstFrame_whenBallHits5PinsOnFirstRollAnd5PinsOnSecondRoll_thenTotalScoreShouldBe0() {
+        game.roll(5);
+        game.roll(5);
+        int score = game.score();
+        assertEquals(0, score);
     }
 }
