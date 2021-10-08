@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GameTest {
 
@@ -87,6 +88,14 @@ public class GameTest {
         game.roll(0);
         int score = game.score();
         assertEquals(0, score);
+    }
+
+    @Test
+    void givenGutterBallInFirstNineFramesAndNotASpareInLastFrame_whenAdditionalRollInLastFrame_thenWillThrowAGameFoulException() {
+        rollMultiples(18, 0);
+        game.roll(4);
+        game.roll(4);
+        assertThrows(GameFoulException.class, ()->game.roll(4),"Committed a game foul.");
     }
 
     private void rollSpare() {
