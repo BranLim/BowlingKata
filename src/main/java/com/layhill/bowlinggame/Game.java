@@ -36,6 +36,6 @@ public class Game {
     }
 
     private boolean isStrike(int currentFrame) {
-        return rolls[currentFrame] == 10 || rolls[currentFrame + 1] == 10;
+        return rolls[currentFrame] == 10;
     }
 }
