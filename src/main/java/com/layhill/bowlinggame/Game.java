@@ -19,7 +19,6 @@ public class Game {
             } else {
                 score += rolls[currentFrame] + rolls[currentFrame + 1];
             }
-            currentFrame += 2;
         }
         return score;
     }

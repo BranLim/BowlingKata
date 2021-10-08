@@ -51,17 +51,17 @@ public class GameTest {
         game.roll(5);
         game.roll(2);
         int score = game.score();
-        assertEquals(12, score);
+        assertEquals(14, score);
     }
 
     @Test
-    void givenFirstRowInIsGutterAndSecondRowIsSpareInFirstFrame_whenBallHits2PinsOnFirstRollAnd2PinsOnSecondRollInSecondFrame_thenTotalScoreShouldbe12(){
+    void givenFirstRowInIsGutterAndSecondRowIsSpareInFirstFrame_whenBallHits2PinsOnFirstRollAnd2PinsOnSecondRollInSecondFrame_thenTotalScoreShouldbe14(){
         game.roll(0);
         game.roll(10);
         game.roll(2);
         game.roll(2);
         int score = game.score();
-        assertEquals(12, score);
+        assertEquals(16, score);
     }
 
     @Test
@@ -70,7 +70,16 @@ public class GameTest {
         game.roll(2);
         game.roll(2);
         int score = game.score();
-        assertEquals(14, score);
+        assertEquals(18, score);
+    }
+
+    @Test
+    void givenFirstFrameIsStrikeOnFirstRow_whenBallHits3PinsOnFirstRollAnd6PinsOnSecondRollInSecondFrame_thenTotalScoreShouldBe14() {
+        game.roll(10);
+        game.roll(3);
+        game.roll(6);
+        int score = game.score();
+        assertEquals(28, score);
     }
 
 
