@@ -46,11 +46,32 @@ public class GameTest {
     }
 
     @Test
-    void givenFirstFrameIsSpare_whenBallHits2PinsOnFirstRoll_thenTotalScoreShouldBe14() {
+    void givenFirstFrameIsSpareWithBothRowsKnocking5PinsEach_whenBallHits2PinsOnFirstRollInSecondFrame_thenTotalScoreShouldBe14() {
         game.roll(5);
         game.roll(5);
         game.roll(2);
         int score = game.score();
+        assertEquals(12, score);
+    }
+
+    @Test
+    void givenFirstRowInIsGutterAndSecondRowIsSpareInFirstFrame_whenBallHits2PinsOnFirstRollAnd2PinsOnSecondRollInSecondFrame_thenTotalScoreShouldbe12(){
+        game.roll(0);
+        game.roll(10);
+        game.roll(2);
+        game.roll(2);
+        int score = game.score();
+        assertEquals(12, score);
+    }
+
+    @Test
+    void givenFirstFrameIsStrikeOnFirstRow_whenBallHits2PinsOnFirstRollAnd2PinsOnSecondRollInSecondFrame_thenTotalScoreShouldBe14() {
+        game.roll(10);
+        game.roll(2);
+        game.roll(2);
+        int score = game.score();
         assertEquals(14, score);
     }
+
+
 }
