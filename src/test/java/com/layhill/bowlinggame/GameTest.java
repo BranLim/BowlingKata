@@ -12,7 +12,6 @@ public class GameTest {
     @BeforeEach
     void setUp() {
         game = new Game();
-
     }
 
     @Test
@@ -38,24 +37,23 @@ public class GameTest {
     }
 
     @Test
-    void givenFirstFrame_whenBallHits5PinsOnFirstRollAnd5PinsOnSecondRoll_thenTotalScoreShouldBe10() {
-        game.roll(5);
-        game.roll(5);
+    void givenFirstFrame_whenRollSpare_thenTotalScoreShouldBe10() {
+        rollSpare();
         int score = game.score();
         assertEquals(10, score);
     }
 
     @Test
-    void givenFirstFrameIsSpareWithBothRowsKnocking5PinsEach_whenBallHits2PinsOnFirstRollInSecondFrame_thenTotalScoreShouldBe14() {
-        game.roll(5);
-        game.roll(5);
+    void givenFirstFrameIsSpare_whenBallHits2PinsOnFirstRollInSecondFrame_thenTotalScoreShouldBe14() {
+        rollSpare();
         game.roll(2);
         int score = game.score();
         assertEquals(14, score);
     }
 
+
     @Test
-    void givenFirstRowInIsGutterAndSecondRowIsSpareInFirstFrame_whenBallHits2PinsOnFirstRollAnd2PinsOnSecondRollInSecondFrame_thenTotalScoreShouldbe14(){
+    void givenFirstRowInIsGutterAndSecondRowIsSpareInFirstFrame_whenBallHits2PinsOnFirstRollAnd2PinsOnSecondRollInSecondFrame_thenTotalScoreShouldbe14() {
         game.roll(0);
         game.roll(10);
         game.roll(2);
@@ -66,7 +64,7 @@ public class GameTest {
 
     @Test
     void givenFirstFrameIsStrikeOnFirstRow_whenBallHits2PinsOnFirstRollAnd2PinsOnSecondRollInSecondFrame_thenTotalScoreShouldBe14() {
-        game.roll(10);
+        rollStrike();
         game.roll(2);
         game.roll(2);
         int score = game.score();
@@ -74,13 +72,35 @@ public class GameTest {
     }
 
     @Test
-    void givenFirstFrameIsStrikeOnFirstRow_whenBallHits3PinsOnFirstRollAnd6PinsOnSecondRollInSecondFrame_thenTotalScoreShouldBe14() {
-        game.roll(10);
+    void givenFirstFrameIsStrikeOnFirstRow_whenBallHits3PinsOnFirstRollAnd6PinsOnSecondRollInSecondFrame_thenTotalScoreShouldBe28() {
+        rollStrike();
         game.roll(3);
         game.roll(6);
         int score = game.score();
         assertEquals(28, score);
     }
 
+    @Test
+    void givenGutterBallInFirstNineFrames_whenBallHitsNoPinsInFirstTwoRolls_thenTotalScoreShouldBe0() {
+        rollMultiples(18, 0);
+        game.roll(0);
+        game.roll(0);
+        int score = game.score();
+        assertEquals(0, score);
+    }
 
+    private void rollSpare() {
+        game.roll(4);
+        game.roll(6);
+    }
+
+    private void rollStrike() {
+        game.roll(10);
+    }
+
+    private void rollMultiples(int numberOfRolls, int pinsKnockedDown) {
+        for (int i = 0; i < numberOfRolls; i++) {
+            game.roll(pinsKnockedDown);
+        }
+    }
 }

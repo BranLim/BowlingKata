@@ -11,13 +11,17 @@ public class Game {
 
     public int score() {
         int score = 0;
-        for (int currentFrame = 0; currentFrame < maximumFrame; currentFrame += 2) {
-            if (isSpare(currentFrame)) {
-                score += 10 + rolls[currentFrame + 2];
-            } else if (isStrike(currentFrame)) {
-                score += 10 + rolls[currentFrame + 2] + rolls[currentFrame + 3];
+        int frameIndex = 0;
+        for (int currentFrame = 0; currentFrame < maximumFrame; currentFrame ++) {
+            if (isSpare(frameIndex)) {
+                score += 10 + rolls[frameIndex + 2];
+                frameIndex+=2;
+            } else if (isStrike(frameIndex)) {
+                score += 10 + rolls[frameIndex + 2] + rolls[frameIndex + 3];
+                frameIndex+=2;
             } else {
-                score += rolls[currentFrame] + rolls[currentFrame + 1];
+                score += rolls[frameIndex] + rolls[frameIndex + 1];
+                frameIndex+=2;
             }
         }
         return score;
